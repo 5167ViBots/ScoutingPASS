@@ -56,8 +56,8 @@ jobs:
         uses: actions/upload-artifact@v4.3.1
         with:
           name: android-app-release-apk
-          path: platforms/android/app/build/outputs/apk/release/app-release.apk
-
+          path: platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
+          
       # - name: Build Android App Bundle
       #   run: cordova build android --release -- --keystore=android.keystore --storePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }} --alias=${{ secrets.ANDROID_KEYSTORE_ALIAS }} --password=${{ secrets.ANDROID_KEYSTORE_PASSWORD }} --packageType=bundle
 
