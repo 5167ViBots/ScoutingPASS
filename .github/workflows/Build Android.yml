@@ -50,7 +50,7 @@ jobs:
 
 
       - name: Build Android release APK
-        run: cordova build android --release --packageType=apk
+        run: cordova build android --release -- --packageType=apk
 
       - name: Upload Android release APK
         uses: actions/upload-artifact@v4.3.1
