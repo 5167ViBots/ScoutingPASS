@@ -1,40 +1,22 @@
 name: Create Release
-
-on:
-release:
-types: [created]
-
+'on':
+  release:
+    types:
+      - created
 jobs:
-build:
-runs-on: ubuntu-latest
-steps:
-# - name: Checkout code
-# uses: actions/checkout@v2
-
-- name: Build
-  call-workflow-passing-data:
-    uses: 5167ViBots/ScoutPASS/.github/workflows/Build Android.yml@main
-
-# - name: Create Release
-#   id: create_release
-#   uses: actions/create-release@v1
-#   env:
-#     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#   with:
-#     tag_name: ${{ github.event.release.tag_name }}
-#     release_name: Release ${{ github.event.release.tag_name }}
-#     body: |
-#       Description of the release
-#     draft: true # while verifying everything is working
-#     prerelease: false
-
-- name: Upload Release Asset
-  id: upload-release-asset
-  uses: actions/upload-release-asset@v1
-  env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  with:
-    upload_url: ${{ steps.create_release.outputs.upload_url }}
-    asset_path: platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
-    asset_name: ViBots.ScoutPASS.${{ github.event.release.tag_name }}.apk
-    asset_content_type: application/zip
+  build:
+    runs-on: ubuntu-latest
+  steps:
+    - name: Build
+      uses: 5167ViBots/ScoutPASS/.github/workflows/Build Android.yml@main
+    - name: Upload Release Asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+      with:
+        upload_url: '${{ steps.create_release.outputs.upload_url }}'
+        asset_path: >-
+          platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
+        asset_name: 'ViBots.ScoutPASS.${{ github.event.release.tag_name }}.apk'
+        asset_content_type: application/zip
